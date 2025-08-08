@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect Four</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <div class="background-shapes"></div>
+    <main class="game-container">
+        <div class="game-board-wrapper">
+            <div id="custom-cursor"></div>
+            <div id="game-board"></div>
+            <svg id="winning-line-svg" class="winning-line" width="100%" height="100%"></svg>
+        </div>
+
+        <aside class="control-panel">
+            <div class="header">
+                <h1>Connect Four</h1>
+                <div class="theme-switcher-wrapper">
+                    <label class="theme-switcher">
+                        <input type="checkbox" id="theme-toggle">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div id="game-info">
+                <div class="player-indicator player1-indicator">
+                    <div class="avatar"><i class="fa-solid fa-user"></i></div>
+                    <span>Player 1</span>
+                </div>
+                <div class="player-indicator player2-indicator">
+                    <div class="avatar" id="player2-avatar"><i class="fa-solid fa-user"></i></div>
+                    <span>Player 2</span>
+                </div>
+            </div>
+
+            <div id="game-setup">
+                <div class="game-setup-group">
+                    <h3>Game Mode</h3>
+                    <div class="custom-radio-group">
+                        <label>
+                            <input type="radio" name="game-mode" value="pvp" checked>
+                            <span>Player vs Player</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="game-mode" value="pva">
+                            <span>Player vs AI</span>
+                        </label>
+                    </div>
+                </div>
+                <div id="ai-difficulty-selector" class="game-setup-group hidden">
+                    <h3>AI Difficulty</h3>
+                    <div class="custom-radio-group segmented-control">
+                        <label>
+                            <input type="radio" name="ai-difficulty-radio" value="easy">
+                            <span>Easy</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="ai-difficulty-radio" value="medium">
+                            <span>Medium</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="ai-difficulty-radio" value="hard" checked>
+                            <span>Hard</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button id="reset-game">New Game</button>
+                <button id="undo-move">Undo</button>
+            </div>
+
+            <div class="move-history-wrapper">
+                <h3>Move History</h3>
+                <ul id="move-history"></ul>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Modal for Game Result -->
+    <div id="result-modal" class="modal">
+        <div class="modal-content">
+            <h2 id="result-message"></h2>
+            <button id="play-again">Play Again</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+
+    <audio id="drop-sound" src="sounds/drop.wav" preload="auto"></audio>
+    <audio id="win-sound" src="sounds/win.wav" preload="auto"></audio>
+    <audio id="draw-sound" src="sounds/draw.wav" preload="auto"></audio>
+</body>
+</html>
