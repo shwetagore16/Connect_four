@@ -1,24 +1,35 @@
 :root {
-    --player1-color: #ff6b6b;
-    --player2-color: #48dbfb;
-    --text-color: #e0e0e0;
-    --glass-bg: rgba(255, 255, 255, 0.1);
-    --glass-border: rgba(255, 255, 255, 0.2);
-    --glass-shadow: rgba(0, 0, 0, 0.15);
-    --bg-gradient-start: #2c3e50;
-    --bg-gradient-end: #4ca1af;
+    --player1-color: #ff5252; /* brighter red */
+    --player2-color: #00d2ff; /* vivid cyan */
+    --text-color: #f2f6f8;
+    --glass-bg: rgba(255, 255, 255, 0.12);
+    --glass-border: rgba(255, 255, 255, 0.28);
+    --glass-shadow: rgba(0, 20, 40, 0.22);
+    --bg-gradient-start: #1f3b73; /* deeper indigo */
+    --bg-gradient-end: #137e8f;  /* richer teal */
     --font-family: 'Poppins', sans-serif;
+    /* Added for clearer selectable buttons */
+    --border-color: rgba(255, 255, 255, 0.32);
+    --text-color-secondary: rgba(255, 255, 255, 0.92);
+    --accent-color: var(--player1-color);
+    /* RGB for glow effects (matches #ff5252) */
+    --accent-color-rgb: 255, 82, 82;
 }
 
 body.dark-mode {
-    --player1-color: #f08a5d;
-    --player2-color: #b83b5e;
-    --text-color: #f7f7f7;
-    --glass-bg: rgba(0, 0, 0, 0.15);
-    --glass-border: rgba(255, 255, 255, 0.1);
-    --glass-shadow: rgba(0, 0, 0, 0.3);
-    --bg-gradient-start: #141e30;
-    --bg-gradient-end: #243b55;
+    --player1-color: #ff7a59;   /* warm, bright */
+    --player2-color: #21e6ff;   /* neon cyan */
+    --text-color: #f9fbfc;
+    --glass-bg: rgba(0, 0, 0, 0.18);
+    --glass-border: rgba(255, 255, 255, 0.14);
+    --glass-shadow: rgba(0, 0, 0, 0.34);
+    --bg-gradient-start: #0d152b; /* deeper night indigo */
+    --bg-gradient-end: #0f3b53;  /* deep teal */
+    /* Keep contrast strong in dark mode */
+    --border-color: rgba(255, 255, 255, 0.28);
+    --text-color-secondary: rgba(255, 255, 255, 0.94);
+    --accent-color: var(--player1-color);
+    --accent-color-rgb: 255, 122, 89; /* approx for #ff7a59 */
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
@@ -37,7 +48,7 @@ body {
     min-height: 100vh;
     color: var(--text-color);
     transition: background 0.5s ease;
-    overflow: hidden;
+    overflow-y: auto; /* enable page scrolling */
 }
 
 .background-shapes {
@@ -86,7 +97,7 @@ body {
     width: 60px; /* Match cell size */
     height: 60px; /* Match cell size */
     border-radius: 50%;
-    border: 4px solid var(--player1-color);
+    border: 4px solid white;
     pointer-events: none; /* So it doesn't block clicks */
     display: none; /* Hidden by default */
     z-index: 100;
@@ -210,7 +221,7 @@ h1 {
 
 .custom-radio-group {
     display: flex;
-    gap: 1rem;
+    gap: 0.75rem;
 }
 
 .custom-radio-group label {
@@ -225,19 +236,39 @@ h1 {
 }
 
 .custom-radio-group span {
-    padding: 0.5rem 1rem;
-    border-radius: var(--border-radius);
-    background-color: rgba(255, 255, 255, 0.05);
+    padding: 0.55rem 1rem;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.06);
     border: 1px solid var(--border-color);
-    transition: all 0.3s ease;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.05s ease, box-shadow 0.2s ease, border-color 0.2s ease;
     color: var(--text-color-secondary);
+    user-select: none;
 }
 
 .custom-radio-group input[type="radio"]:checked + span {
     background-color: var(--accent-color);
     color: #fff;
-    font-weight: 600;
-    box-shadow: 0 0 15px rgba(var(--accent-color-rgb), 0.5);
+    font-weight: 700;
+    border-color: transparent;
+    box-shadow: 0 6px 18px rgba(var(--accent-color-rgb), 0.45), inset 0 -2px 0 rgba(0,0,0,0.15);
+    transform: translateY(-1px);
+}
+
+/* Hover and pressed feedback */
+.custom-radio-group label:hover span {
+    border-color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+.custom-radio-group label:active span {
+    transform: translateY(0); /* cancel lift when pressed */
+    box-shadow: inset 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/* Keyboard focus visibility */
+.custom-radio-group input[type="radio"]:focus-visible + span {
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
 }
 
 .segmented-control {
@@ -259,6 +290,7 @@ h1 {
     border-right: 1px solid var(--border-color);
     text-align: center;
     width: 100%;
+    padding: 0.6rem 0.9rem; /* slightly taller for tap targets */
 }
 
 .segmented-control label:last-child span {
@@ -289,12 +321,22 @@ button {
     background: var(--glass-bg);
     cursor: pointer;
     font-weight: 600;
-    transition: background-color 0.3s, transform 0.2s;
+    transition: background-color 0.2s, transform 0.08s ease, box-shadow 0.2s;
 }
 
 button:hover {
     background-color: rgba(255, 255, 255, 0.2);
     transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(0);
+    box-shadow: inset 0 2px 6px rgba(0,0,0,0.25);
+}
+
+button:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
 }
 
 #undo-move:disabled {
